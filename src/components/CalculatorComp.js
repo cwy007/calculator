@@ -61,7 +61,7 @@ class CalculatorComp extends Component {
 
   render() {
     console.log("props:", this.props);
-    const {n1, n2, opr, eq, result, onNumclick, onOprClick, onEqualsClick, onClsClick} = this.props;
+    const {n1, n2, opr, eq, result} = this.props;
 
     let lOpr;
     switch (opr) {
@@ -130,7 +130,7 @@ class CalculatorComp extends Component {
 }
 
 CalculatorComp.propTypes = {
-  result: PropTypes.number.isRequired,
+  result: PropTypes.oneOfType([PropTypes.number.isRequired, PropTypes.string.isRequired]),
   store: PropTypes.object
 }
 

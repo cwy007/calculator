@@ -10,3 +10,7 @@ ch13 中的用例
 ## UI
 
 ![计算器UI](public/calculator_ui.png)
+
+## 使用 Provider 重构计算器应用
+
+![calculator-pro](public/%20React%20+%20Redux计算器应用逻辑图%20ch14.png)
