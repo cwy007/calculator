@@ -6,3 +6,7 @@ ch13 中的用例
 ## React + Redux计算器应用逻辑图
 
 ![React + Redux计算器应用逻辑图](public/calculator.png)
+
+## UI
+
+![计算器UI](public/calculator_ui.png)
