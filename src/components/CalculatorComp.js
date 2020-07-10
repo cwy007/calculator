@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CalculateType } from '../actions';
+import { CalculatorType } from '../actions';
+
+function HTMLDecode(key) {
+  let codes = {
+    "&#215;": "*",
+    "&#247;": "/"
+  }
+  return codes[key]
+}
 
 class CalculatorComp extends Component {
   constructor(props) {
@@ -41,7 +49,7 @@ class CalculatorComp extends Component {
       });
     }
     this.props.vstore.dispatch({
-      type: CalculateType.NUM,
+      type: CalculatorType.NUM,
       n1: n1,
       n2: n2,
       opr: opr,
@@ -55,7 +63,7 @@ class CalculatorComp extends Component {
     let opr = e.target.id.toString();
     console.log('opr: ' + opr);
     this.props.vstore.dispatch({
-      type: CalculateType.OPR,
+      type: CalculatorType.OPR,
       n1: this.props.vstore.getState().n1,
       n2: this.props.vstore.getState().n2,
       opr: opr,
@@ -69,7 +77,7 @@ class CalculatorComp extends Component {
     let eq = '=';
     console.log('eq: ' + eq);
     this.props.vstore.dispatch({
-      type: CalculateType.EQUALS,
+      type: CalculatorType.EQUALS,
       n1: this.props.vstore.getState().n1,
       n2: this.props.vstore.getState().n2,
       opr: this.props.vstore.getState().opr,
@@ -81,7 +89,7 @@ class CalculatorComp extends Component {
   onClsClick(e) {
     e.preventDefault();
     this.props.vstore.dispatch({
-      type: CalculateType.CLS,
+      type: CalculatorType.CLS,
       n1: '',
       n2: '',
       opr: '',
@@ -138,7 +146,7 @@ class CalculatorComp extends Component {
           {' '}
           <button id='num5' onClick={this.onNumClick}> 5 </button>
           {' '}
-          <button id='num6' onClick={this.onNumClick}> 36</button>
+          <button id='num6' onClick={this.onNumClick}> 6</button>
           {' '}
           <button id='minus' onClick={this.onOprClick}> - </button><br/>
           {' '}
