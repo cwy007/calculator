@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux';
+import CalculatorComp from './components/CalculatorComp';
+import reducerCalculator from './reducers/reducerCalculator';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const store = createStore(reducerCalculator);
+const rootEle = document.getElementById('root');
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const render = () => ReactDOM.render(
+  <CalculatorComp
+    s={store.getState()}
+    vstore={store}
+  />,
+  rootEle
+)
+
+render();
+
+store.subscribe(render);
