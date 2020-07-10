@@ -32,14 +32,14 @@ var reducerCalculator = (state = initState, action) => {
         case 'add':
           result = Number.parseInt(action.n1) + Number.parseInt(action.n2);
           break;
-        case 'minux':
+        case 'minus':
           result = Number.parseInt(action.n1) - Number.parseInt(action.n2);
           break;
         case 'multiple':
           result = Number.parseInt(action.n1) * Number.parseInt(action.n2);
           break;
         case 'divide':
-          if (Number.parseInt(action.n2 !== 0)) {
+          if (Number.parseInt(action.n2) !== 0) {
             result = Number.parseInt(action.n1) / Number.parseInt(action.n2);
           } else {
             result = Number.NaN;
@@ -58,11 +58,11 @@ var reducerCalculator = (state = initState, action) => {
       };
     case CalculatorType.CLS:
       return {
-        n1: action.n1,
-        n2: action.n2,
-        opr: action.opr,
-        eq: action.eq,
-        result: action.result
+        n1: '',
+        n2: '',
+        opr: '',
+        eq: '',
+        result: ''
       }
     default:
       return state;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CalculatorType } from '../actions';
 
 function HTMLDecode(key) {
   let codes = {
@@ -13,6 +12,7 @@ function HTMLDecode(key) {
 class CalculatorComp extends Component {
   constructor(props) {
     super(props);
+    console.log("props:", props);
     this.state = {
       b: 1
     };
@@ -24,86 +24,44 @@ class CalculatorComp extends Component {
 
   onNumClick(e) {
     e.preventDefault();
-    let n1, opr, n2, eq, result;
+    let num = e.target.id.substr(3);
+    console.log('num: ' + num);
     if (this.state.b) {
-      n1 = e.target.id.substr(3);
-      n2 = this.props.vstore.getState().n2;
-      opr = this.props.vstore.getState().opr;
-      eq = this.props.vstore.getState().eq;
-      result = this.props.vstore.getState().result;
-      console.log('n1: ' + n1);
-      console.log('n2: ' + n2);
+      this.props.onNumClick(num, this.props.n2, this.props.opr, this.props.eq, this.props.result);
       this.setState({
         b: 0
       });
     } else {
-      n1 = this.props.vstore.getState().n1;
-      n2 = e.target.id.substr(3);
-      opr = this.props.vstore.getState().opr;
-      eq = this.props.vstore.getState().eq;
-      result = this.props.vstore.getState().result;
-      console.log('n1: ' + n1);
-      console.log('n2: ' + n2);
+      this.props.onNumClick(this.props.n1, num, this.props.opr, this.props.eq, this.props.result);
       this.setState({
         b: 1
       });
     }
-    this.props.vstore.dispatch({
-      type: CalculatorType.NUM,
-      n1: n1,
-      n2: n2,
-      opr: opr,
-      eq: eq,
-      result: result
-    });
   }
 
   onOprClick(e) {
     e.preventDefault();
     let opr = e.target.id.toString();
     console.log('opr: ' + opr);
-    this.props.vstore.dispatch({
-      type: CalculatorType.OPR,
-      n1: this.props.vstore.getState().n1,
-      n2: this.props.vstore.getState().n2,
-      opr: opr,
-      eq: this.props.vstore.getState().eq,
-      result: this.props.vstore.getState().result
-    });
+    this.props.onOprClick(this.props.n1, this.props.n2, opr, this.props.eq, this.props.result);
   }
 
   onEqualsClick(e) {
     e.preventDefault();
     let eq = '=';
     console.log('eq: ' + eq);
-    this.props.vstore.dispatch({
-      type: CalculatorType.EQUALS,
-      n1: this.props.vstore.getState().n1,
-      n2: this.props.vstore.getState().n2,
-      opr: this.props.vstore.getState().opr,
-      eq: eq,
-      result: this.props.vstore.getState().result
-    });
+    console.log("props:", this.props);
+    this.props.onEqualsClick(this.props.n1, this.props.n2, this.props.opr, eq, this.props.result);
   }
 
   onClsClick(e) {
     e.preventDefault();
-    this.props.vstore.dispatch({
-      type: CalculatorType.CLS,
-      n1: '',
-      n2: '',
-      opr: '',
-      eq: '',
-      result: ''
-    });
+    this.props.onClsClick(this.props.n1, this.props.n2, this.props.opr, this.props.eq, this.props.result);
   }
 
   render() {
-    const n1 = this.props.s.n1;
-    const opr = this.props.s.opr;
-    const n2 = this.props.s.n2;
-    const eq = this.props.s.eq;
-    const result = this.props.s.result;
+    console.log("props:", this.props);
+    const {n1, n2, opr, eq, result, onNumclick, onOprClick, onEqualsClick, onClsClick} = this.props;
 
     let lOpr;
     switch (opr) {
@@ -129,7 +87,7 @@ class CalculatorComp extends Component {
 
     return(
       <span>
-        <h3>基于 React + Redux 的简单计算器应用</h3>
+        <h3>基于 React + Redux 的重构计算器应用</h3>
 
         <p>计算结果：{expression}</p>
         <p>
@@ -172,7 +130,7 @@ class CalculatorComp extends Component {
 }
 
 CalculatorComp.propTypes = {
-  result: PropTypes.string.isRequired,
+  result: PropTypes.number.isRequired,
   store: PropTypes.object
 }
 

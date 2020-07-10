@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { CalculateType } from '../actions';
-import CalculatorComp, { CalculateType } from '../components/CalculatorComp';
+import { CalculatorType } from '../actions';
+import CalculatorComp from '../components/CalculatorComp';
 
 function mapStateToProps(state) {
   return state;
@@ -9,7 +9,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onNumClick: (n1, n2, opr, eq, result) => dispatch({
-      type: CalculateType.NUM,
+      type: CalculatorType.NUM,
       n1: n1,
       n2: n2,
       opr: opr,
@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch) {
       result: result
     }),
     onOprClick: (n1, n2, opr, eq, result) => dispatch({
-      type: CalculateType.OPR,
+      type: CalculatorType.OPR,
       n1: n1,
       n2: n2,
       opr: opr,
@@ -25,7 +25,7 @@ function mapDispatchToProps(dispatch) {
       result: result
     }),
     onEqualsClick: (n1, n2, opr, eq, result) => dispatch({
-      type: CalculateType.EQUALS,
+      type: CalculatorType.EQUALS,
       n1: n1,
       n2: n2,
       opr: opr,
@@ -33,7 +33,7 @@ function mapDispatchToProps(dispatch) {
       result: result
     }),
     onClsClick: (n1, n2, opr, eq, result) => dispatch({
-      type: CalculateType.CLS,
+      type: CalculatorType.CLS,
       n1: n1,
       n2: n2,
       opr: opr,
